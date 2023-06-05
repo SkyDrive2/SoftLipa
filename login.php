@@ -9,6 +9,7 @@
   <title>任性的人</title>
   <link rel="stylesheet" type="text/css" href="./component/global_style.css">
   <link rel="stylesheet" type="text/css" href="./styles/login.css">
+  <link rel="stylesheet" type="text/css" href="./styles/wave.css">
 
   <script src="https://kit.fontawesome.com/00b6be94d5.js" crossorigin="anonymous"></script>
 
@@ -67,6 +68,9 @@
         </div>
       </div>
     </form>
+    <div class="wave"></div>
+     <div class="wave"></div>
+     <div class="wave"></div>
   </div>
 </body>
 
@@ -109,7 +113,11 @@
                 </script>';
         exit();
       } else {
-        echo "登入失敗，請檢查電子郵件和密碼是否正確。";
+        echo '<script>
+        if (confirm("登入失敗，請重新登入")) {
+          window.location.href = "login.php";
+        }
+      </script>';
 
       }
       

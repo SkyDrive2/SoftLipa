@@ -7,6 +7,8 @@
   <title>註冊帳號</title>
   <link rel="stylesheet" type="text/css" href="./component/global_style.css">
   <link rel="stylesheet" type="text/css" href="./styles/login.css">
+  <link rel="stylesheet" type="text/css" href="./styles/wave.css">
+
   <script src="https://kit.fontawesome.com/00b6be94d5.js" crossorigin="anonymous"></script>
   <script>
     function togglePasswordVisibility() {
@@ -167,6 +169,9 @@
         </div>
       </div>
     </form>
+    <div class="wave"></div>
+     <div class="wave"></div>
+     <div class="wave"></div>
   </div>
 </body>
 
@@ -185,7 +190,11 @@
             $checkUserQuery = "SELECT * FROM Users WHERE email='$email'"; 
             $checkUserResult = $conn->query($checkUserQuery);
             if ($checkUserResult->fetch(PDO::FETCH_ASSOC)) {
-                echo "錯誤：該使用者已存在";
+                echo '<script>
+                if (confirm("該帳號已被使用")) {
+                  window.location.href = "register.php";
+                }
+              </script>';
             } else {
                 //將資料插入資料庫
                 $insertQuery = "INSERT INTO Users(Email,Password) VALUES ('$email', '$password')";

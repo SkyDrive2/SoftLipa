@@ -26,6 +26,7 @@ $conn = null;
   <title>任性的人</title>
   <link rel="stylesheet" type="text/css" href="./component/global_style.css">
   <link rel="stylesheet" type="text/css" href="./styles/index.css">
+  <link rel="stylesheet" type="text/css" href="./styles/wave.css">
 
   <script src="https://kit.fontawesome.com/00b6be94d5.js" crossorigin="anonymous"></script>
   <style>
@@ -157,6 +158,10 @@ $conn = null;
     ?>
 </div>
 
-
+<div>
+     <div class="wave"></div>
+     <div class="wave"></div>
+     <div class="wave"></div>
+  </div>
 </body>
 </html>

@@ -1,7 +1,9 @@
 body {
-  background-image: url("../images/2157.png");
-
-  background-position: center;
+  margin: auto;
+  overflow: auto;
+  background: #D3D3D3;
+  background-size: 400% 400%;
+  background-attachment: fixed;
 }
 
 /* 登入頁面樣式 */
