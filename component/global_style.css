@@ -1,0 +1,93 @@
+/* 基本樣式 */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #000000;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 50px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.logo-link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.header-left {
+  margin-left: 10px;
+  color: #fff;
+}
+
+
+.header-right a i:hover {
+  animation: bounce 0.5s infinite;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.header-right a i {
+  color: #fff;
+}
+
+.header-right a {
+  margin-right: 20px;
+
+}
+
+.header-right a:last-child {
+  margin-right: 0;
+
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+
+#search-box {
+  opacity: 0;
+  align-items: center;
+  margin-right: 20px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform-origin: top right;
+  transform: translateX(-100%);
+}
+
+#search-box.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+#search-box input[type="text"] {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  outline: none;
+  transition: border-color 0.3s ease;
+  background-color: transparent;
+  color: #fff;
+}
+
+#search-box input[type="text"]:focus {
+  border-color: #fff;
+}
