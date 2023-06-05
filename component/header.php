@@ -4,7 +4,7 @@
 <head>
 
   <meta charset="UTF-8">
-  <title>任性的人</title>
+
   <link rel="stylesheet" type="text/css" href="./global_style.css">
   <script src="https://kit.fontawesome.com/00b6be94d5.js" crossorigin="anonymous"></script>
   
@@ -18,7 +18,9 @@
       <?php
         // 檢查是否有查詢參數
         if (isset($_GET['keyword']) && !empty($_GET['keyword'])) {
-          echo '<h1>搜尋結果</h1>';
+          echo '<h1>任性的人｜搜尋結果</h1>';
+        } else if (isset($_GET['cart']) && $_GET['cart'] === 'true') {
+          echo '<h1>任性的人｜購物車</h1>';
         } else {
           echo '<h1>任性的人</h1>';
         }
@@ -42,7 +44,7 @@
             echo '<a href="login.php  "><i class="fas fa-user"></i></a>';
           }
       ?>
-      <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
+      <a href="cart.php?cart=true"><i class="fas fa-shopping-cart"></i></a>
     </div>
 
     <script>

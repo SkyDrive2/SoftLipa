@@ -1,13 +1,14 @@
 <?php
 include "db_connect.php";
 include './component/header.php';
+
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
-    <title>使用者資料</title>
+    <title>任性的人</title>
     <link rel="stylesheet" type="text/css" href="./component/global_style.css">
     <link rel="stylesheet" type="text/css" href="./styles/wave.css">
     <link rel="stylesheet" type="text/css" href="./styles/product_detail.css">

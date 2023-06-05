@@ -27,7 +27,7 @@ if (isset($_GET['keyword'])) {
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>任性的人</title>
+  <title>搜尋結果</title>
   <link rel="stylesheet" type="text/css" href="./component/global_style.css">
   <link rel="stylesheet" type="text/css" href="./styles/index.css">
   <link rel="stylesheet" type="text/css" href="./styles/wave.css">
