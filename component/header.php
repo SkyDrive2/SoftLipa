@@ -15,7 +15,14 @@
     <div class="header-left">
 
       <a href="index.php" class="logo-link">
-        <h1>任性的人</h1>
+      <?php
+        // 檢查是否有查詢參數
+        if (isset($_GET['keyword']) && !empty($_GET['keyword'])) {
+          echo '<h1>搜尋結果</h1>';
+        } else {
+          echo '<h1>任性的人</h1>';
+        }
+      ?>
       </a>
 
 
@@ -23,7 +30,7 @@
     <div class="header-right">
 
       <div id="search-box">
-        <input type="text"> 
+        <input type="text" id="search-input" placeholder="輸入商品名" onkeypress="handleKeyPress(event)">
       </div>
       <a href="#" id="search-icon"><i class="fas fa-search"></i></a>
       <?php
@@ -37,6 +44,11 @@
       ?>
       <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
     </div>
+
+    <script>
+      // 新增一個變數，預設為 false
+      var isSearchPerformed = false;
+    </script>
   </header>
 
 
@@ -50,7 +62,7 @@
 
     searchIcon.addEventListener('click', function () {
       isSearchBoxVisible = !isSearchBoxVisible;
-      
+
       if (isSearchBoxVisible) {
         searchBox.classList.add('active');
       } else {
@@ -81,12 +93,29 @@
         searchBox.classList.remove('active');
       }
     });
+
+    function handleKeyPress(event) {
+      if (event.key === 'Enter') {
+        // 防止表單提交
+        event.preventDefault();
+
+        // 獲取使用者輸入的搜尋關鍵字
+        var keyword = searchBox.querySelector('#search-input').value;
+
+        // 進行搜尋
+        if (keyword.trim() !== '') {
+          // 使用 window.location.href 重新導向至搜尋結果頁面，並將關鍵字作為查詢參數傳遞
+          window.location.href = 'search.php?keyword=' + keyword;
+          isSearchPerformed = true;
+        }
+      }
+    }
+
+    var searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('keypress', handleKeyPress);
   });
-
-
-
-
 </script>
+
 
 
 </body>

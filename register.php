@@ -122,7 +122,7 @@
   <div class="registration-container">
     <h2>註冊</h2>
 
-    <form action="http://127.0.0.1/demo/register.php" method="POST">
+    <form action="http://127.0.0.1/softlipa/register.php" method="POST">
       <div class="form-group">
         <label for="username">輸入Email</label>
         <input type="text" id="username" name="username" required onkeyup="validateEmail();checkFormValidity()">

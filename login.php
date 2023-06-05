@@ -28,7 +28,7 @@
 
   <div class="login-container">
     <h2>登入您的帳號</h2>
-    <form action="http://127.0.0.1/demo/login.php" method="post">
+    <form action="http://127.0.0.1/softlipa/login.php" method="post">
       <div class="form-group">
         <label for="email">輸入信箱：</label>
         <input type="text" id="email" name="email" required>
