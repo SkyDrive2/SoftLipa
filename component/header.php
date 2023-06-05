@@ -7,7 +7,7 @@
   <title>任性的人</title>
   <link rel="stylesheet" type="text/css" href="./global_style.css">
   <script src="https://kit.fontawesome.com/00b6be94d5.js" crossorigin="anonymous"></script>
-
+  
 </head>
 
 <body>
@@ -32,7 +32,7 @@
       <div id="search-box">
         <input type="text" id="search-input" placeholder="輸入商品名" onkeypress="handleKeyPress(event)">
       </div>
-      <a href="#" id="search-icon"><i class="fas fa-search"></i></a>
+      <a id="search-icon"><i  class="fas fa-search"></i></a>
       <?php
           session_start();
 

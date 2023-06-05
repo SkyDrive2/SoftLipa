@@ -46,17 +46,20 @@ header {
 }
 
 .header-right a i {
+  cursor: pointer;
+}
+
+.header-right a i {
   color: #fff;
 }
 
-.header-right a {
+.header-right a i {
   margin-right: 20px;
 
 }
 
-.header-right a:last-child {
-  margin-right: 0;
-
+.header-right a i:last-child {
+  margin-right: 20;
 }
 
 .header-right {

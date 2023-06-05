@@ -6,6 +6,7 @@ include "db_connect.php";
 $sql = "SELECT * FROM Products";
 $result = $conn->query($sql);
 
+
 // 存儲商品資料的陣列
 $products = array();
 
@@ -42,8 +43,7 @@ $conn = null;
     .for-header {
     padding-top: 150px;
     }
-  </style>
-  
+  </style>  
 </head>
 <body>
     <div class = "for-header"></div>
@@ -109,23 +109,30 @@ $conn = null;
             $productPhoto = $product["ProductPhoto"];
             ?>
             <div class="product">
-            <a href="product_details.php?id=<?php echo $product['ProductID']; ?>" class="product-link">
+            <a class="product-link" href="product_details.php?id=<?php echo $product['ProductID']; ?>">
             <img src="<?php echo $productPhoto; ?>" alt="Product Photo" class="product-image">
             <div class="overlay"></div>
-            </a>
-
-
-                <h3><?php echo $productName; ?></h3>
-                <p>TW$<?php echo $price; ?></p>
+            <div class="add-to-cart">
+                <form action="addToCart.php" method="POST">
+                <input type="hidden" name="productID" value="<?php echo $product['ProductID']; ?>">
+                <input type="hidden" name="quantity" value="1"> 
+                <input type="hidden" name="sourcePage" value="index">
+                <button type="submit">加入購物車</button>
+                </form>
             </div>
-            <?php
-            $counter++;
+            </a>
+                <h3><?php echo $productName; ?></h3>
+                <p>NT$<?php echo $price; ?></p>
+                </div>
 
-            // 每行已顯示三個商品，換行
-            if ($counter % 3 == 0) {
-                echo '</div>'; // 結束上一行
-                echo '<div class="section">'; // 開始新的一行
-            }
+                <?php
+                $counter++;
+
+                // 每行已顯示三個商品，換行
+                if ($counter % 3 == 0) {
+                    echo '</div>'; // 結束上一行
+                    echo '<div class="section">'; // 開始新的一行
+                }
         }
 
         // 若最後一行商品不足三個，補齊空白
@@ -138,8 +145,6 @@ $conn = null;
         ?>
     </div> <!-- 結束最後一行 -->
 </div> <!-- 結束 main-content 區塊 -->
-
-
 
 
 <!-- Your clothing display code here -->
@@ -162,6 +167,10 @@ $conn = null;
      <div class="wave"></div>
      <div class="wave"></div>
      <div class="wave"></div>
+
   </div>
+
+
+
 </body>
 </html>
