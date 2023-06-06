@@ -7,6 +7,7 @@
   padding: 20px;
   background-color: rgba(0, 0, 0, 0.05);
   margin: 0 auto;
+  display: flex;
 }
 
 .title-con {
@@ -23,13 +24,9 @@
   padding: 0 20px;
 }
 
-.ex-product,
-.ex-per,
-.ex-qua,
-.ex-tot,
-.ex-exc {
-  flex: 1;
-  text-align: center;
+.cart-table {
+  margin-bottom: 10px;
+  flex-grow: 1;
 }
 
 .per-cart {
@@ -58,7 +55,7 @@
 .product-con {
   display: flex;
   align-items: center;
-  flex: 1;
+  flex-grow: 1;
 }
 
 .product-con .product {
@@ -71,6 +68,7 @@
   flex-direction: column;
   padding: 5px 20px 0 10px;
   font-size: 14px;
+  flex-grow: 1;
 }
 
 .product-name-con .product-name {
@@ -100,7 +98,8 @@ img {
 
 .price-con {
   flex-direction: column;
-  width: 15.88022%;
+  flex-grow: 1;
+  text-align: center;
 }
 
 .price {
@@ -111,7 +110,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1;
+
 }
 
 .quantity-btn {
@@ -165,8 +164,22 @@ img {
 
 .subtotal {
   text-align: center;
-  flex: 1;
+  flex-grow: 1;
   width: 10.43557%;
   color: #ee4d2d;
 
+}
+
+tr {
+  display: table-row;
+  vertical-align: center;
+  text-align: center;
+  border-color: inherit;
+}
+
+td {
+  height: 100%;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
 }

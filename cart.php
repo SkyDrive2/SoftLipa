@@ -30,110 +30,111 @@ $conn = null;
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>購物車</title>
-    <link rel="stylesheet" type="text/css" href="./component/global_style.css">
-    <link rel="stylesheet" type="text/css" href="./styles/wave.css">
-    <link rel="stylesheet" type="text/css" href="./styles/cart.css">
-    <script src="https://kit.fontawesome.com/00b6be94d5.js" crossorigin="anonymous"></script>
-    
-    <style>
-      header {
+  <meta charset="UTF-8">
+  <title>購物車</title>
+  <link rel="stylesheet" type="text/css" href="./component/global_style.css">
+  <link rel="stylesheet" type="text/css" href="./styles/wave.css">
+  <link rel="stylesheet" type="text/css" href="./styles/cart.css">
+  <script src="https://kit.fontawesome.com/00b6be94d5.js" crossorigin="anonymous"></script>
+
+  <style>
+    header {
       position: fixed;
       top: 0;
       left: 0;
       width: 98%;
       z-index: 9999;
-      }
+    }
 
 
-      .for-header {
+    .for-header {
       padding-top: 150px;
-      }
-  </style>  
+    }
+  </style>
 </head>
+
 <body>
 
-  <div class = "for-header"></div>
-  <body>  
+  <div class="for-header"></div>
 
-    <div class = "all-carts">
-      <div class = "title-con">
-      <div class="check">
+  <body>
 
-      </div>
-      <div class="ex-product">商品</div>
-      <div class="ex-per">單價</div>
-      <div class="ex-qua">數量</div>
-      <div class="ex-tot">總計</div>
-      <div class="ex-exc">操作</div>
-      </div>
-      <div class = "details">
-      <?php
-    // 假設 $carts 是從資料庫取得的購物車商品
-    foreach ($carts as $cart) {
-      // 取得商品資訊
-      $productID = $cart['ProductID'];
-      $productName = $cart['ProductName'];
-      $price = $cart['Price'];
-      $stockQuantity = $cart['StockQuantity'];
-      $productPhoto = $cart['ProductPhoto'];
-      $quantity = $cart['Quantity'];
+    <div class="all-carts">
+      <table class="cart-table">
+        <thead>
+          <tr>
 
-      // 計算小計
-      $subtotal = $price * $quantity;
-    ?>
-  <div class="per-cart">
-    <div class="cells">
-      <div class="check">
-        <!-- 這裡放入勾選商品的邏輯 -->
-      </div>
-      <div class="product-con">
-        <div class="product">
-          <img src="<?php echo $productPhoto; ?>" alt="Product Photo" class="product-image">
-          <div class="product-name-con">
-            <div class="product-name">
-              <?php echo $productName; ?>
-            </div>
-          </div>
-        </div>
-      </div>
+            <th>商品</th>
+            <th>單價</th>
+            <th>數量</th>
+            <th>總計</th>
+            <th>操作</th>
 
-        <div class="price-con">
-          <div>
-            <span class = "price" >$<?php echo intval($price); ?></span>
-          </div>
-        
-        </div>
-        <div class="quantity-input-group">  
-        <div class="input-con ">
-          <button class="quantity-btn decrement" type="button"><i class="fa fa-minus"></i></button>
-          <input class="quantity-input" type="text" name="quantity" value="<?php echo $quantity; ?>">
-          <button class="quantity-btn increment" type="button"><i class="fa fa-plus"></i></button>
-        </div>
-      </div>
-        <div class="subtotal">
-          $<?php echo $subtotal; ?>
-        </div>
-        
-        <button class="delete-button">刪除</button>
-      </div>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          // 假設 $carts 是從資料庫取得的購物車商品
+          foreach ($carts as $cart) {
+            // 取得商品資訊
+            $productID = $cart['ProductID'];
+            $productName = $cart['ProductName'];
+            $price = $cart['Price'];
+            $stockQuantity = $cart['StockQuantity'];
+            $productPhoto = $cart['ProductPhoto'];
+            $quantity = $cart['Quantity'];
+
+            // 計算小計
+            $subtotal = $price * $quantity;
+            ?>
+            <tr>
+              <td class="check">
+                <!-- 這裡放入勾選商品的邏輯 -->
+              </td>
+              <td class="product-con">
+                <div class="product">
+                  <img src="<?php echo $productPhoto; ?>" alt="Product Photo" class="product-image">
+                  <div class="product-name-con">
+                    <div class="product-name">
+                      <?php echo $productName; ?>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="price-con">
+                <span class="price">$
+                  <?php echo intval($price); ?>
+                </span>
+              </td>
+              <td class="quantity-input-group">
+                <div class="input-con">
+                  <button class="quantity-btn decrement" type="button"><i class="fa fa-minus"></i></button>
+                  <input class="quantity-input" type="text" name="quantity" value="<?php echo $quantity; ?>">
+                  <button class="quantity-btn increment" type="button"><i class="fa fa-plus"></i></button>
+                </div>
+              </td>
+              <td class="subtotal">$
+                <?php echo $subtotal; ?>
+              </td>
+              <td><button class="delete-button">刪除</button></td>
+            </tr>
+            <?php
+          }
+          ?>
+        </tbody>
+      </table>
     </div>
-  </div>
-<?php
-}
-?>
 
-<div class="total-amount">
-  <!-- 這裡放入總金額的顯示 -->
-</div>
+    <div class="total-amount">
+      <!-- 這裡放入總金額的顯示 -->
+    </div>
+    </div>
+    <button class="checkout-button">結帳</button>
 
-<button class="checkout-button">結帳</button>
-
-  
-  <script>
+    <script>
     // JavaScript程式碼
-  </script>
+    </script>
 
   </body>
+
 </html>
