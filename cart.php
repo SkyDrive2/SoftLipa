@@ -24,6 +24,7 @@ $result = $conn->query($sql);
 
 $carts = array();
 $totalAmount = 0;
+$totalItem = 0;
 
 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
   $carts[] = $row;
@@ -95,6 +96,7 @@ $conn = null;
             // 計算小計
             $subtotal = $price * $quantity;
             $totalAmount += $subtotal;
+            $totalItem += $quantity;
             ?>
             <tr class="gray-line">
               <td>
@@ -146,7 +148,8 @@ $conn = null;
                   <?php echo "$ " . $subtotal; ?>
                 </div>
               </td>
-              <script>    function decrementQuantity(productID) {
+              <script>
+                function decrementQuantity(productID) {
                   var quantityInput = document.querySelector('input[data-productid="' + productID + '"]');
                   var quantity = parseInt(quantityInput.value);
 
@@ -186,6 +189,9 @@ $conn = null;
 
 
             <?php
+            $cartsJson = json_encode($carts);
+            $cartsJsonEscaped = htmlspecialchars($cartsJson);
+
           }
           ?>
 
@@ -198,14 +204,23 @@ $conn = null;
 
     <div class="checkout-section">
       <div class="total-amount">
-        總金額(買了吧給我錢)：
+        總金額(
+        <?php echo $totalItem; ?>個商品)：
 
       </div>
 
       <div class="effect-of-totalAmount">
         <?php echo "$ " . $totalAmount; ?>
       </div>
-      <button class="checkout-button">結帳</button>
+      <form method="post" action="orders.php">
+
+        <input type="hidden" name="totalAmount" value="<?php echo $totalAmount ?>">
+        <input type="hidden" name="products" value="<?php echo $cartsJsonEscaped; ?>">
+
+
+        <button class="checkout-button" type="submit" name="checkout">結帳</button>
+      </form>
+
     </div>
 
 

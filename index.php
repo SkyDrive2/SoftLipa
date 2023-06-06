@@ -22,107 +22,120 @@ $conn = null;
 
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="UTF-8">
-  <title>任性的人</title>
-  <link rel="stylesheet" type="text/css" href="./component/global_style.css">
-  <link rel="stylesheet" type="text/css" href="./styles/index.css">
-  <link rel="stylesheet" type="text/css" href="./styles/wave.css">
+    <meta charset="UTF-8">
+    <title>任性的人</title>
+    <link rel="stylesheet" type="text/css" href="./component/global_style.css">
+    <link rel="stylesheet" type="text/css" href="./styles/index.css">
+    <link rel="stylesheet" type="text/css" href="./styles/wave.css">
 
-  <script src="https://kit.fontawesome.com/00b6be94d5.js" crossorigin="anonymous"></script>
-  <style>
-    header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 98%;
-    z-index: 9999;
-    }
+    <script src="https://kit.fontawesome.com/00b6be94d5.js" crossorigin="anonymous"></script>
+    <style>
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 98%;
+            z-index: 9999;
+        }
 
 
-    .for-header {
-    padding-top: 150px;
-    }
-  </style>  
+        .for-header {
+            padding-top: 150px;
+        }
+    </style>
 </head>
+
 <body>
-    <div class = "for-header"></div>
-<div class="main-content">
-    <?php
-     // 取得排序方式（價格高低）       
-     $sort = isset($_GET['sort']) ? $_GET['sort'] : '';
-     $productsPerPage = isset($_GET['per_page']) ? $_GET['per_page'] : 9;
-     ?>
-    <div class="top-right">
-            <form class="select-form" action="?per_page=<?php echo $productsPerPage; ?>&sort=<?php echo $sort; ?>" method="GET">
+    <div class="for-header"></div>
+    <div class="main-content">
+        <?php
+        // 取得排序方式（價格高低）       
+        $sort = isset($_GET['sort']) ? $_GET['sort'] : '';
+        $productsPerPage = isset($_GET['per_page']) ? $_GET['per_page'] : 9;
+        ?>
+        <div class="top-right">
+            <form class="select-form" action="?per_page=<?php echo $productsPerPage; ?>&sort=<?php echo $sort; ?>"
+                method="GET">
                 <select name="per_page" onchange="this.form.submit()">
-                    <option value="9" <?php if ($productsPerPage == 9) echo 'selected'; ?>>每頁 9 個</option>
-                    <option value="12" <?php if ($productsPerPage == 12) echo 'selected'; ?>>每頁 12 個</option>
-                    <option value="15" <?php if ($productsPerPage == 15) echo 'selected'; ?>>每頁 15 個</option>
+                    <option value="9" <?php if ($productsPerPage == 9)
+                        echo 'selected'; ?>>每頁 9 個</option>
+                    <option value="12" <?php if ($productsPerPage == 12)
+                        echo 'selected'; ?>>每頁 12 個</option>
+                    <option value="15" <?php if ($productsPerPage == 15)
+                        echo 'selected'; ?>>每頁 15 個</option>
                 </select>
             </form>
-            
-            <form class="select-form" action="?per_page=<?php echo $productsPerPage; ?>&sort=<?php echo $sort; ?>" method="GET">
+
+            <form class="select-form" action="?per_page=<?php echo $productsPerPage; ?>&sort=<?php echo $sort; ?>"
+                method="GET">
                 <select name="sort" onchange="this.form.submit()">
                     <option value="">排序方式</option>
-                    <option value="high" <?php if ($sort == 'high') echo 'selected'; ?>>價格高到低</option>
-                    <option value="low" <?php if ($sort == 'low') echo 'selected'; ?>>價格低到高</option>
+                    <option value="high" <?php if ($sort == 'high')
+                        echo 'selected'; ?>>價格高到低</option>
+                    <option value="low" <?php if ($sort == 'low')
+                        echo 'selected'; ?>>價格低到高</option>
                 </select>
             </form>
         </div>
-    <div class="section">
-        <?php
-        // 計數器，用於計算每行已顯示的商品數量
-        $counter = 0;
+        <div class="section">
+            <?php
+            // 計數器，用於計算每行已顯示的商品數量
+            $counter = 0;
 
-       
-        // 排序商品資料
-        if ($sort == 'high') {
-            usort($products, function ($a, $b) {
-                return $b['Price'] - $a['Price'];
-            });
-        } else if ($sort == 'low') {
-            usort($products, function ($a, $b) {
-                return $a['Price'] - $b['Price'];
-            });
-        }
 
-        // 取得要顯示的商品數量和每頁商品數量
-        $totalProducts = count($products);
-        
-        $maxProducts = min($totalProducts, $productsPerPage);
+            // 排序商品資料
+            if ($sort == 'high') {
+                usort($products, function ($a, $b) {
+                    return $b['Price'] - $a['Price'];
+                });
+            } else if ($sort == 'low') {
+                usort($products, function ($a, $b) {
+                    return $a['Price'] - $b['Price'];
+                });
+            }
 
-        // 計算總頁數
-        $totalPages = ceil($totalProducts / $productsPerPage);
+            // 取得要顯示的商品數量和每頁商品數量
+            $totalProducts = count($products);
 
-        // 取得當前頁數
-        $currentPage = $_GET['page'] ?? 1;
+            $maxProducts = min($totalProducts, $productsPerPage);
 
-        // 計算起始索引和結束索引
-        $startIndex = ($currentPage - 1) * $productsPerPage;
-        $endIndex = $startIndex + $maxProducts;
+            // 計算總頁數
+            $totalPages = ceil($totalProducts / $productsPerPage);
 
-        // 迴圈取得每筆商品資料
-        foreach (array_slice($products, $startIndex, $maxProducts) as $product) {
-            $productName = $product["ProductName"];
-            $price = $product["Price"];
-            $productPhoto = $product["ProductPhoto"];
-            ?>
-            <div class="product">
-            <a class="product-link" href="product_details.php?id=<?php echo $product['ProductID']; ?>">
-            <img src="<?php echo $productPhoto; ?>" alt="Product Photo" class="product-image">
-            <div class="overlay"></div>
-            <div class="add-to-cart">
-                <form action="addToCart.php" method="POST">
-                <input type="hidden" name="productID" value="<?php echo $product['ProductID']; ?>">
-                <input type="hidden" name="quantity" value="1"> 
-                <input type="hidden" name="sourcePage" value="index">
-                <button type="submit">加入購物車</button>
-                </form>
-            </div>
-            </a>
-                <h3><?php echo $productName; ?></h3>
-                <p>NT$<?php echo  intval($price); ?></p>
+            // 取得當前頁數
+            $currentPage = $_GET['page'] ?? 1;
+
+            // 計算起始索引和結束索引
+            $startIndex = ($currentPage - 1) * $productsPerPage;
+            $endIndex = $startIndex + $maxProducts;
+
+            // 迴圈取得每筆商品資料
+            foreach (array_slice($products, $startIndex, $maxProducts) as $product) {
+                $productName = $product["ProductName"];
+                $price = $product["Price"];
+                $productPhoto = $product["ProductPhoto"];
+                ?>
+                <div class="product">
+                    <a class="product-link" href="product_details.php?id=<?php echo $product['ProductID']; ?>">
+                        <img src="<?php echo $productPhoto; ?>" alt="Product Photo" class="product-image">
+                        <div class="overlay"></div>
+                        <div class="add-to-cart">
+                            <form action="addToCart.php" method="POST">
+                                <input type="hidden" name="productID" value="<?php echo $product['ProductID']; ?>">
+                                <input type="hidden" name="quantity" value="1">
+                                <input type="hidden" name="sourcePage" value="index">
+                                <button type="submit">加入購物車</button>
+                            </form>
+                        </div>
+                    </a>
+                    <h3>
+                        <?php echo $productName; ?>
+                    </h3>
+                    <p>NT$
+                        <?php echo intval($price); ?>
+                    </p>
                 </div>
 
                 <?php
@@ -133,44 +146,45 @@ $conn = null;
                     echo '</div>'; // 結束上一行
                     echo '<div class="section">'; // 開始新的一行
                 }
-        }
-
-        // 若最後一行商品不足三個，補齊空白
-        if ($counter % 3 != 0) {
-            $remainingItems = 3 - ($counter % 3);
-            for ($i = 0; $i < $remainingItems; $i++) {
-                echo '<div class="product empty"></div>';
             }
+
+            // 若最後一行商品不足三個，補齊空白
+            if ($counter % 3 != 0) {
+                $remainingItems = 3 - ($counter % 3);
+                for ($i = 0; $i < $remainingItems; $i++) {
+                    echo '<div class="product empty"></div>';
+                }
+            }
+            ?>
+        </div> <!-- 結束最後一行 -->
+    </div> <!-- 結束 main-content 區塊 -->
+
+
+    <!-- Your clothing display code here -->
+
+    <div class="page-count">
+        <?php
+        if ($currentPage > 1) {
+            $prevPage = $currentPage - 1;
+            echo '<a href="?page=' . $prevPage . '&per_page=' . $productsPerPage . '"> << </a>';
+        }
+        echo '<p>第 ' . $currentPage . ' 頁 / 共 ' . $totalPages . ' 頁</p>';
+        if ($currentPage < $totalPages) {
+            $nextPage = $currentPage + 1;
+            echo '<a href="?page=' . $nextPage . '&per_page=' . $productsPerPage . '"> >></a>';
         }
         ?>
-    </div> <!-- 結束最後一行 -->
-</div> <!-- 結束 main-content 區塊 -->
+    </div>
 
+    <div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
 
-<!-- Your clothing display code here -->
-
-<div class="page-count">
-    <?php
-    if ($currentPage > 1) {
-        $prevPage = $currentPage - 1;
-        echo '<a href="?page=' . $prevPage . '&per_page=' . $productsPerPage . '"> << </a>';
-    }
-    echo '<p>第 ' . $currentPage . ' 頁 / 共 ' . $totalPages . ' 頁</p>';
-    if ($currentPage < $totalPages) {
-        $nextPage = $currentPage + 1;
-        echo '<a href="?page=' . $nextPage . '&per_page=' . $productsPerPage . '"> >></a>';
-    }
-    ?>
-</div>
-
-<div>
-     <div class="wave"></div>
-     <div class="wave"></div>
-     <div class="wave"></div>
-
-  </div>
+    </div>
 
 
 
 </body>
+
 </html>
