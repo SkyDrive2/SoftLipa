@@ -99,15 +99,18 @@ $conn = null;
             <tr class="gray-line">
               <td>
                 <div class="product-con">
-                  <div class="product">
-                    <img src="<?php echo $productPhoto; ?>" alt="Product Photo" class="product-image">
-                    <div class="product-name-con">
-                      <div class="product-name">
-                        <?php echo $productName; ?>
+                  <a href="product_details.php?id=<?php echo $productID; ?>" class="product-link">
+                    <div class="product">
+                      <img src="<?php echo $productPhoto; ?>" alt="Product Photo" class="product-image">
+                      <div class="product-name-con">
+                        <div class="product-name">
+                          <?php echo $productName; ?>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </a>
                 </div>
+
               </td>
               <td>
                 <div class="price-con">
@@ -120,19 +123,21 @@ $conn = null;
                 <div class="quantity-input-group">
                   <div class="input-con">
                     <button class="quantity-btn decrement" type="button"
-                      onclick="decrementQuantity(<?php echo $cartId; ?>)">
+                      onclick="decrementQuantity(<?php echo $productID; ?>)">
                       <i class="fa fa-minus"></i>
                     </button>
                     <form method="post" action="update_cart.php">
                       <input type="hidden" name="cartID" value="<?php echo $cartId; ?>">
                       <input type="hidden" name="productID" value="<?php echo $productID; ?>">
-                      <input class="quantity-input" type="number" name="quantity" value="<?php echo $quantity; ?>"
-                        onchange="this.form.submit()">
+                      <input class="quantity-input" type="text" name="quantity" value="<?php echo $quantity; ?>"
+                        onchange="this.form.submit()" data-productid="<?php echo $productID; ?>">
                     </form>
                     <button class="quantity-btn increment" type="button"
-                      onclick="incrementQuantity(<?php echo $cartId; ?>)">
+                      onclick="incrementQuantity(<?php echo $productID; ?>)">
                       <i class="fa fa-plus"></i>
                     </button>
+
+
                   </div>
                 </div>
               </td>
@@ -141,9 +146,8 @@ $conn = null;
                   <?php echo "$ " . $subtotal; ?>
                 </div>
               </td>
-              <script>
-                function decrementQuantity(cartID) {
-                  var quantityInput = document.querySelector('input[name="quantity"]');
+              <script>    function decrementQuantity(productID) {
+                  var quantityInput = document.querySelector('input[data-productid="' + productID + '"]');
                   var quantity = parseInt(quantityInput.value);
 
                   if (quantity > 1) {
@@ -155,8 +159,8 @@ $conn = null;
                   }
                 }
 
-                function incrementQuantity(cartID) {
-                  var quantityInput = document.querySelector('input[name="quantity"]');
+                function incrementQuantity(productID) {
+                  var quantityInput = document.querySelector('input[data-productid="' + productID + '"]');
                   var quantity = parseInt(quantityInput.value);
 
                   quantity++;
@@ -165,6 +169,7 @@ $conn = null;
                   // Submit the form
                   quantityInput.form.submit();
                 }
+
               </script>
 
               <td>
@@ -186,18 +191,25 @@ $conn = null;
 
         </tbody>
       </table>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
     </div>
 
-    <div class="total-amount">
-      總額：
-      <?php echo "$ " . $totalAmount; ?>
-    </div>
-    </div>
-    <button class="checkout-button">結帳</button>
+    <div class="checkout-section">
+      <div class="total-amount">
+        總金額(買了吧給我錢)：
 
-    <script>
-    // JavaScript程式碼
-    </script>
+      </div>
+
+      <div class="effect-of-totalAmount">
+        <?php echo "$ " . $totalAmount; ?>
+      </div>
+      <button class="checkout-button">結帳</button>
+    </div>
+
+
+
 
   </body>
 
