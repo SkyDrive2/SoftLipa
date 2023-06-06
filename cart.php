@@ -9,15 +9,21 @@ if (!isset($_SESSION['UserID'])) {
   exit();
 }
 
-$userid = $_SESSION['UserID'];
+$userId = $_SESSION['UserID'];
 
 
-$sql = "SELECT P.ProductPhoto,P.ProductName, P.Price, SC.*FROM ShoppingCart SC JOIN Products P ON SC.ProductID = P.ProductID WHERE SC.UserID = $userid;";
+$sql = "SELECT CP.*, P.ProductName, P.ProductPhoto, P.Price, CP.Quantity
+FROM ShoppingCart AS SC
+JOIN Cart_Product AS CP ON SC.CartID = CP.CartID
+JOIN Products AS P ON CP.ProductID = P.ProductID
+WHERE SC.UserID = $userId ;
+";
+
 $result = $conn->query($sql);
 
 
-// 存儲商品資料的陣列
 $carts = array();
+$totalAmount = 0;
 
 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
   $carts[] = $row;
@@ -64,7 +70,7 @@ $conn = null;
         <thead>
           <tr>
 
-            <th>商品</th>
+            <th class="product-ti">商品</th>
             <th>單價</th>
             <th>數量</th>
             <th>總計</th>
@@ -72,6 +78,7 @@ $conn = null;
 
           </tr>
         </thead>
+
         <tbody>
           <?php
           // 假設 $carts 是從資料庫取得的購物車商品
@@ -83,50 +90,71 @@ $conn = null;
             $stockQuantity = $cart['StockQuantity'];
             $productPhoto = $cart['ProductPhoto'];
             $quantity = $cart['Quantity'];
+            $cartId = $cart['CartID'];
 
             // 計算小計
             $subtotal = $price * $quantity;
+            $totalAmount += $subtotal;
             ?>
-            <tr>
-              <td class="check">
-                <!-- 這裡放入勾選商品的邏輯 -->
-              </td>
-              <td class="product-con">
-                <div class="product">
-                  <img src="<?php echo $productPhoto; ?>" alt="Product Photo" class="product-image">
-                  <div class="product-name-con">
-                    <div class="product-name">
-                      <?php echo $productName; ?>
+            <tr class="gray-line">
+              <td>
+                <div class="product-con">
+                  <div class="product">
+                    <img src="<?php echo $productPhoto; ?>" alt="Product Photo" class="product-image">
+                    <div class="product-name-con">
+                      <div class="product-name">
+                        <?php echo $productName; ?>
+                      </div>
                     </div>
                   </div>
                 </div>
               </td>
-              <td class="price-con">
-                <span class="price">$
-                  <?php echo intval($price); ?>
-                </span>
+              <td>
+                <div class="price-con">
+                  <span class="price">$
+                    <?php echo intval($price); ?>
+                  </span>
+                  <div>
               </td>
-              <td class="quantity-input-group">
-                <div class="input-con">
-                  <button class="quantity-btn decrement" type="button"><i class="fa fa-minus"></i></button>
-                  <input class="quantity-input" type="text" name="quantity" value="<?php echo $quantity; ?>">
-                  <button class="quantity-btn increment" type="button"><i class="fa fa-plus"></i></button>
+              <td>
+                <dive class="quantity-input-group">
+                  <div class="input-con">
+                    <button class="quantity-btn decrement" type="button"><i class="fa fa-minus"></i></button>
+                    <input class="quantity-input" type="text" name="quantity" value="<?php echo $quantity; ?>">
+                    <button class="quantity-btn increment" type="button"><i class="fa fa-plus"></i></button>
+                  </div>
+                  <div>
+              </td>
+              <td>
+                <div class="subtotal">
+
+                  <?php echo "$ " . $subtotal; ?>
                 </div>
               </td>
-              <td class="subtotal">$
-                <?php echo $subtotal; ?>
+              <td>
+                <form id="deleteForm" action="delete_cart.php" method="POST">
+                  <input type="hidden" name="productID" value="<?php echo $productID; ?>">
+                  <input type="hidden" name="cartID" value="<?php echo $cartId; ?>">
+                  <div class="delete-button">
+                    <button type="submit">刪除</button>
+                    <div>
+                </form>
+
               </td>
-              <td><button class="delete-button">刪除</button></td>
             </tr>
+
+
             <?php
           }
           ?>
+
         </tbody>
       </table>
     </div>
 
     <div class="total-amount">
-      <!-- 這裡放入總金額的顯示 -->
+      總額：
+      <?php echo "$ " . $totalAmount; ?>
     </div>
     </div>
     <button class="checkout-button">結帳</button>
