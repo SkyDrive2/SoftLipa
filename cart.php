@@ -117,20 +117,56 @@ $conn = null;
                   <div>
               </td>
               <td>
-                <dive class="quantity-input-group">
+                <div class="quantity-input-group">
                   <div class="input-con">
-                    <button class="quantity-btn decrement" type="button"><i class="fa fa-minus"></i></button>
-                    <input class="quantity-input" type="text" name="quantity" value="<?php echo $quantity; ?>">
-                    <button class="quantity-btn increment" type="button"><i class="fa fa-plus"></i></button>
+                    <button class="quantity-btn decrement" type="button"
+                      onclick="decrementQuantity(<?php echo $cartId; ?>)">
+                      <i class="fa fa-minus"></i>
+                    </button>
+                    <form method="post" action="update_cart.php">
+                      <input type="hidden" name="cartID" value="<?php echo $cartId; ?>">
+                      <input type="hidden" name="productID" value="<?php echo $productID; ?>">
+                      <input class="quantity-input" type="number" name="quantity" value="<?php echo $quantity; ?>"
+                        onchange="this.form.submit()">
+                    </form>
+                    <button class="quantity-btn increment" type="button"
+                      onclick="incrementQuantity(<?php echo $cartId; ?>)">
+                      <i class="fa fa-plus"></i>
+                    </button>
                   </div>
-                  <div>
+                </div>
               </td>
               <td>
-                <div class="subtotal">
-
+                <div class="subtotal" id="subtotal-<?php echo $cartId; ?>">
                   <?php echo "$ " . $subtotal; ?>
                 </div>
               </td>
+              <script>
+                function decrementQuantity(cartID) {
+                  var quantityInput = document.querySelector('input[name="quantity"]');
+                  var quantity = parseInt(quantityInput.value);
+
+                  if (quantity > 1) {
+                    quantity--;
+                    quantityInput.value = quantity;
+
+                    // Submit the form
+                    quantityInput.form.submit();
+                  }
+                }
+
+                function incrementQuantity(cartID) {
+                  var quantityInput = document.querySelector('input[name="quantity"]');
+                  var quantity = parseInt(quantityInput.value);
+
+                  quantity++;
+                  quantityInput.value = quantity;
+
+                  // Submit the form
+                  quantityInput.form.submit();
+                }
+              </script>
+
               <td>
                 <form id="deleteForm" action="delete_cart.php" method="POST">
                   <input type="hidden" name="productID" value="<?php echo $productID; ?>">
