@@ -53,8 +53,9 @@ include './component/header.php';
                   <img src="<?php echo $row['ProductPhoto']; ?>" alt="Product Photo">
               </div>
               <div class="product-details">
+              <div class="product-info">
                   <h1 ><?php echo $row['ProductName']; ?></h1>
-                  <p class="product-price">NT$<?php echo $row['Price']; ?></p>
+                  <p class="product-price">NT$<?php echo intval($row['Price']); ?></p>
                  
                       <div class="quantity-wrapper">
                         <label class="quantity-label">數量</label>
@@ -95,7 +96,7 @@ include './component/header.php';
                       <p class="product-quantity" >現庫存只剩下<?php echo $row['StockQuantity']; ?>件</p>
                     </div>  
                 
-                
+                    </div>
               </div>
         </div>
         </div>

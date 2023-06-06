@@ -122,7 +122,7 @@ $conn = null;
             </div>
             </a>
                 <h3><?php echo $productName; ?></h3>
-                <p>NT$<?php echo $price; ?></p>
+                <p>NT$<?php echo  intval($price); ?></p>
                 </div>
 
                 <?php

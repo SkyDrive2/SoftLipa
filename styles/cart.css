@@ -1,54 +1,172 @@
-table {
+.all-carts {
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .05);
+  border-radius: 0.125rem;
+  background: #fff;
+  overflow: visible;
+  max-width: 960px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.05);
+  margin: 0 auto;
+}
+
+.title-con {
+  display: flex;
+  align-items: center;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .05);
+  overflow: hidden;
+  border-radius: 3px;
+  height: 55px;
+  font-size: 14px;
+  background: #fff;
+  margin-bottom: 12px;
+  color: #888;
+  padding: 0 20px;
+}
+
+.ex-product,
+.ex-per,
+.ex-qua,
+.ex-tot,
+.ex-exc {
+  flex: 1;
+  text-align: center;
+}
+
+.per-cart {
+  text-decoration: none;
+  color: rgba(0, 0, 0, .87);
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+}
+
+.cells {
+  display: flex;
+  align-items: center;
   width: 100%;
-  border-collapse: collapse;
 }
 
-th,
-td {
-  padding: 10px;
-  text-align: left;
+.check {
+  padding: 0 12px 0 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  min-width: 58px;
+  box-sizing: border-box;
 }
 
-th {
-  background-color: #f2f2f2;
+.product-con {
+  display: flex;
+  align-items: center;
+  flex: 1;
 }
 
-tr:nth-child(even) {
-  background-color: #f9f9f9;
+.product-con .product {
+  display: flex;
 }
 
-/* 商品照片樣式 */
-.product-photo {
+.product-name-con {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 5px 20px 0 10px;
+  font-size: 14px;
+}
+
+.product-name-con .product-name {
+  line-height: 16px;
+  overflow: hidden;
+}
+
+.product-name {
+  text-decoration: none;
+  color: rgba(0, 0, 0, .87);
+  margin-bottom: 5px;
+  max-height: 32px;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+img {
+  background-position: 50%;
+  background-size: contain;
+  background-repeat: no-repeat;
   width: 80px;
   height: 80px;
 }
 
-/* 數量輸入框樣式 */
-.quantity-input {
-  width: 50px;
+.price-con {
+  flex-direction: column;
+  width: 15.88022%;
+}
+
+.price {
   text-align: center;
 }
 
-/* 刪除按鈕樣式 */
-.delete-button {
-  background-color: #ff0000;
-  color: #ffffff;
-  border: none;
+.quantity-input-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.quantity-btn {
+  background-color: transparent;
+  border-color: transparent;
+  padding: 5px 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid #4a3e3ed1;
+  border-right: 1px solid #4a3e3ed1;
+}
+
+.quantity-btn i {
+  display: inline-block;
+}
+
+.quantity-btn:hover {
+  background-color: #9c9393;
+}
+
+.quantity-input {
+  width: 50px;
   padding: 5px 10px;
-  cursor: pointer;
-}
-
-/* 結帳按鈕樣式 */
-.checkout-button {
-  background-color: #4caf50;
-  color: #ffffff;
   border: none;
-  padding: 10px 20px;
-  cursor: pointer;
+  background-color: transparent;
+  color: #000;
+  text-align: center;
 }
 
-/* 總金額區塊樣式 */
-.total-amount {
-  margin-top: 20px;
-  font-weight: bold;
+.quantity-input:focus {
+  outline: none;
+}
+
+.with-border {
+  border: 1px solid #4a3e3ed1;
+  border-radius: 4px;
+}
+
+.input-con {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #4a3e3ed1;
+  border-bottom: 1px solid #4a3e3ed1;
+  border-radius: 4px;
+}
+
+.subtotal {
+  text-align: center;
+  flex: 1;
+  width: 10.43557%;
+  color: #ee4d2d;
+
 }
