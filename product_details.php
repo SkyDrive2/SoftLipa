@@ -82,10 +82,14 @@ include './component/header.php';
                   var incrementBtn = document.querySelector('.quantity-btn.increment');
                   var quantityInput = document.querySelector('.quantity-input');
                   var hiddenQuantity = document.getElementById('hiddenQuantity');
-                  quantityInput.value = 1;
+                  var maxQuantity = <?php echo $row['StockQuantity']; ?>;
+                  var minQuantity = 1;
+
+                  quantityInput.value = minQuantity;
+
                   decrementBtn.addEventListener('click', function () {
                     var currentValue = parseInt(quantityInput.value);
-                    if (currentValue > 1) {
+                    if (currentValue > minQuantity) {
                       quantityInput.value = currentValue - 1;
                       hiddenQuantity.value = quantityInput.value;
                     }
@@ -93,8 +97,10 @@ include './component/header.php';
 
                   incrementBtn.addEventListener('click', function () {
                     var currentValue = parseInt(quantityInput.value);
-                    quantityInput.value = currentValue + 1;
-                    hiddenQuantity.value = quantityInput.value;
+                    if (currentValue < maxQuantity) {
+                      quantityInput.value = currentValue + 1;
+                      hiddenQuantity.value = quantityInput.value;
+                    }
                   });
                 </script>
                 <p class="product-quantity">現庫存只剩下
