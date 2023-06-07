@@ -50,39 +50,30 @@ $page = $_GET['page'];
         sections[i].style.display = 'none';
       }
 
-      // 確認跳轉頁面的參數值
-      var page = '<?php echo $page; ?>';
-
-      if (page === 'order-details') {
-        // 設置購買清單項目為橘色並移除個人檔案項目的橘色
-        var purchaseListMenuItem = document.querySelector('.menu-item[data-item="purchaseList"]');
-        var profileMenuItem = document.querySelector('.menu-item[data-item="profile"]');
-        purchaseListMenuItem.style.color = 'orange';
-        profileMenuItem.style.color = 'black';
-
-        // 只顯示訂單明細區塊並隱藏個人資料區塊
-        var profileSection = document.querySelector('.section.profile-section');
-        profileSection.style.display = 'none';
-        var orderDetailsSections = document.querySelectorAll('.section.order-details');
-        for (var i = 0; i < orderDetailsSections.length; i++) {
-          orderDetailsSections[i].style.display = 'block';
-        }
-      } else {
-        // 如果不是 'order-details'，保持預設效果，即個人檔案項目為橘色並顯示使用者資料區塊
-        var profileMenuItem = document.querySelector('.menu-item[data-item="profile"]');
-        profileMenuItem.style.color = 'orange';
-
-        // 隱藏訂單明細區塊
-        var orderDetailsSections = document.querySelectorAll('.section.order-details');
-        for (var i = 0; i < orderDetailsSections.length; i++) {
-          orderDetailsSections[i].style.display = 'none';
-        }
-
-        // 顯示個人資料區塊
+      // 根據被點擊的項目顯示對應的區域
+      if (item === 'profile') {
         var profileSection = document.querySelector('.section.profile-section');
         profileSection.style.display = 'block';
+      } else if (item === 'purchaseList') {
+        var purchaseListSections = document.querySelectorAll('.section.order-details');
+        for (var i = 0; i < purchaseListSections.length; i++) {
+          purchaseListSections[i].style.display = 'block';
+        }
       }
+
     }
+    window.addEventListener('DOMContentLoaded', (event) => {
+      var page = '<?php echo $page; ?>';
+
+      // 檢查 page 參數並選擇對應的側邊欄項目
+      if (page === 'order-details') {
+        selectMenuItem('purchaseList');
+      } else {
+        selectMenuItem('profile');
+      }
+    });
+
+
   </script>
 
 </head>
@@ -132,74 +123,79 @@ $page = $_GET['page'];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
           $orders[] = $row;
         }
+        if (count($orders) > 0) {
+          foreach ($orders as $order) {
+            $orderID = $order['OrderID'];
+            $orderDate = $order['OrderDate'];
+            $totalAmount = $order['TotalAmount'];
+            $sqlDetails = "SELECT * FROM OrderDetails WHERE OrderID = $orderID";
 
-        foreach ($orders as $order) {
-          $orderID = $order['OrderID'];
-          $orderDate = $order['OrderDate'];
-          $totalAmount = $order['TotalAmount'];
-          $sqlDetails = "SELECT * FROM OrderDetails WHERE OrderID = $orderID";
+            $stmtDetails = $conn->query($sqlDetails);
+            $orderDetails = $stmtDetails->fetchAll(PDO::FETCH_ASSOC);
 
-          $stmtDetails = $conn->query($sqlDetails);
-          $orderDetails = $stmtDetails->fetchAll(PDO::FETCH_ASSOC);
+            echo '<div class="section order-details">';
+            foreach ($orderDetails as $detail) {
+              echo '<div class="order-con">';
+              echo '<div class="empty"></div>';
+              echo '<div class="border"></div>';
 
-          echo '<div class="section order-details">';
-          foreach ($orderDetails as $detail) {
-            echo '<div class="order-con">';
-            echo '<div class="empty"></div>';
-            echo '<div class="border"></div>';
+              $productID = $detail['ProductID'];
+              $quantity = $detail['Quantity'];
+              $price = $detail['Price'];
 
-            $productID = $detail['ProductID'];
-            $quantity = $detail['Quantity'];
-            $price = $detail['Price'];
+              // 取得商品資料
+              $sqlProduct = "SELECT * FROM Products WHERE ProductID = $productID";
+              $stmtProduct = $conn->query($sqlProduct);
+              $product = $stmtProduct->fetch(PDO::FETCH_ASSOC);
+              $productPhoto = $product['ProductPhoto'];
+              $productName = $product['ProductName'];
 
-            // 取得商品資料
-            $sqlProduct = "SELECT * FROM Products WHERE ProductID = $productID";
-            $stmtProduct = $conn->query($sqlProduct);
-            $product = $stmtProduct->fetch(PDO::FETCH_ASSOC);
-            $productPhoto = $product['ProductPhoto'];
-            $productName = $product['ProductName'];
+              echo '<div class="per-product">';
+              echo '<div class = "de-product">';
+              echo '<div class="image-wrap">';
+              echo '<a href="product_details.php?id=' . $productID . '">';
+              echo '<img class="product-photo" src="' . $productPhoto . '">';
+              echo '</a>';
+              echo '</div>';
+              echo '<div class="product-details">';
+              echo '<div class = "section-product-name">';
+              echo '<span class="product-name">' . $productName . '</span>';
+              echo '</div>';
+              echo '<div class = section-quantity>';
+              echo '<p class="product-quantity">x' . $quantity . '</p>';
+              echo '</div>';
+              echo '</div>';
+              echo '</div>';
+              echo '<p class="product-price">＄' . intval($price) . '</p>';
 
-            echo '<div class="per-product">';
-            echo '<div class = "de-product">';
-            echo '<div class="image-wrap">';
-            echo '<a href="product_details.php?id=' . $productID . '">';
-            echo '<img class="product-photo" src="' . $productPhoto . '">';
-            echo '</a>';
+              echo '</div>';
+
+              echo '</div>'; // 結束商品區塊的 div
+            }
+
+            echo '<div class="order-section">';
+            echo '<p class = "date">' . $orderDate . '</p>';
+            echo '<div class = "right-section">';
+            echo '<button class="cancel-button" onclick="window.location.href=\'delete_order.php?orderID=' . $orderID . '\'">取消訂單</button>';
+            echo '<div>訂單金額:</div>';
+            echo '<div class = "total-amount">＄' . intval($totalAmount) . '</div>';
             echo '</div>';
-            echo '<div class="product-details">';
-            echo '<div class = "section-product-name">';
-            echo '<span class="product-name">' . $productName . '</span>';
-            echo '</div>';
-            echo '<div class = section-quantity>';
-            echo '<p class="product-quantity">x' . $quantity . '</p>';
-            echo '</div>';
-            echo '</div>';
-            echo '</div>';
-            echo '<p class="product-price">＄' . intval($price) . '</p>';
-
             echo '</div>';
 
-            echo '</div>'; // 結束商品區塊的 div
-          }
-
-          echo '<div class="order-section">';
-          echo '<p class = "date">' . $orderDate . '</p>';
-          echo '<div class = "right-section">';
-          echo '<button class="cancel-button" onclick="window.location.href=\'delete_order.php?orderID=' . $orderID . '\'">取消訂單</button>';
-          echo '<div>訂單金額:</div>';
-          echo '<div class = "total-amount">＄' . intval($totalAmount) . '</div>';
-          echo '</div>';
-          echo '</div>';
-
-          echo '</div>'; // 結束 section 的 div
+            echo '</div>'; // 結束 section 的 div
         
-          // 添加訂單之間的間距
-          echo '<div class="order-spacing"></div>';
+            // 添加訂單之間的間距
+            echo '<div class="order-spacing"></div>';
+          }
+        } else {
+          echo '<div class="section order-details ">';
+          echo '<div class = "no-orders">';
+          echo '還不趕快讓我賺錢！';
+          echo '</div>';
+          echo '</div>';
         }
 
         ?>
-
-
 
       </div>
     </div>
