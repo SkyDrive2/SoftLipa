@@ -1,5 +1,5 @@
 <?php
- include "./component/header.php";
+include "./component/header.php";
 session_start();
 
 
@@ -11,6 +11,7 @@ session_destroy();
 
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <title>登出成功</title>
@@ -24,16 +25,18 @@ session_destroy();
     }
   </script>
 </head>
+
 <body>
   <div class="login-container">
-  <h1>成功登出</h1>
-  <p>您已經成功登出系統。</p>
-  
-  <button onclick="redirectToLogin()">確定</button>
-  <div class="wave"></div>
-     <div class="wave"></div>
-     <div class="wave"></div> 
-</div>
+    <h1>成功登出</h1>
+    <p>真的不花錢嗎？</p>
+
+    <button onclick="redirectToLogin()">確定</button>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
 
 </body>
+
 </html>
