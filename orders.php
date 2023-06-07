@@ -10,15 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
   $totalAmount = $_POST['totalAmount'];
 
   // 在Orders表中插入資料
-  $sql = "INSERT INTO Orders (UserID, TotalAmount) VALUES (?, ?)";
+  $sql = "INSERT INTO Orders (UserID, TotalAmount)  OUTPUT Inserted.OrderID VALUES (?, ?)";
   $stmt = $conn->prepare($sql);
   $stmt->execute([$userID, $totalAmount]);
 
-  $Order_sql = "SELECT OrderID FROM Orders WHERE UserID = $userID";
-
-  // 準備查詢
-  $Order_stmt = $conn->query($Order_sql);
-  if ($row = $Order_stmt->fetch(PDO::FETCH_ASSOC)) {
+  if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $orderID = $row['OrderID'];
   }
 
@@ -52,7 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
 
 
   // 重定向到訂單完成頁面或其他處理邏輯
-  header("Location: order_completed.php");
+  header("Location: dashboard.php?page=order-details");
+
   exit();
 }
 ?>

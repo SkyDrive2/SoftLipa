@@ -69,8 +69,8 @@
       </div>
     </form>
     <div class="wave"></div>
-     <div class="wave"></div>
-     <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
   </div>
 </body>
 
@@ -78,52 +78,52 @@
 
 
 <?php
-  include "db_connect.php";
-  
-  
+include "db_connect.php";
 
 
-  if (isset($_POST['email']) && isset($_POST['password'])) {
-    // 取得使用者提交的電子郵件和密碼
-    $email = $_POST['email'];
-    $password = $_POST['password'];
 
-    try {
-      // 準備 SQL 查詢
-      $stmt = "SELECT * FROM Users WHERE email = '$email' AND password = '$password'";
 
-      $result = $conn->query($stmt);
+if (isset($_POST['email']) && isset($_POST['password'])) {
+  // 取得使用者提交的電子郵件和密碼
+  $email = $_POST['email'];
+  $password = $_POST['password'];
 
-      // 檢查結果的筆數
-      if ( $row = $result->fetch(PDO::FETCH_ASSOC)) {
-        // 登入成功
-        session_start();
+  try {
+    // 準備 SQL 查詢
+    $stmt = "SELECT * FROM Users WHERE email = '$email' AND password = '$password'";
 
-        // 將使用者資料存儲在 session 變數中
-        $_SESSION['UserID'] = $row['UserID'];
-        $_SESSION['UserName'] = $row['UserName'];
-        $_SESSION['Address'] = $row['Address'];
-        $_SESSION['ContactInfo'] = $row['ContactInfo'];
-        $_SESSION['Email'] = $row['Email'];
-       
-        echo '<script>
-                  if (confirm("登入成功！！！")) {
-                    window.location.href = "dashboard.php";
-                  }
-                </script>';
-        exit();
-      } else {
-        echo '<script>
+    $result = $conn->query($stmt);
+
+    // 檢查結果的筆數
+    if ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+      // 登入成功
+      session_start();
+
+      // 將使用者資料存儲在 session 變數中
+      $_SESSION['UserID'] = $row['UserID'];
+      $_SESSION['UserName'] = $row['UserName'];
+      $_SESSION['Address'] = $row['Address'];
+      $_SESSION['ContactInfo'] = $row['ContactInfo'];
+      $_SESSION['Email'] = $row['Email'];
+
+      echo '<script>
+        if (confirm("登入成功")) {
+          window.location.href = "dashboard.php";
+        }
+      </script>';
+      exit();
+    } else {
+      echo '<script>
         if (confirm("登入失敗，請重新登入")) {
           window.location.href = "login.php";
         }
       </script>';
 
-      }
-      
-    } catch (PDOException $e) {
-      echo "錯誤: " . $e->getMessage();
     }
-   
+
+  } catch (PDOException $e) {
+    echo "錯誤: " . $e->getMessage();
+  }
+
 }
 ?>

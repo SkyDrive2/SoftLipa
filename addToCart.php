@@ -49,8 +49,6 @@
 
       if ($cartProductResult) {
         $_SESSION['addToCartSuccess'] = true;
-        echo '<script>alert("商品已成功加入購物車！");</script>';
-
         if ($sourcePage == "index") {
           echo '<script>
                       document.addEventListener("DOMContentLoaded", function() {
@@ -104,7 +102,7 @@
 
         if ($cartProductResult) {
           $_SESSION['addToCartSuccess'] = true;
-          echo '<script>alert("商品已成功加入購物車！");</script>';
+
 
           if ($sourcePage == "index") {
             echo '<script>

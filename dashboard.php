@@ -1,20 +1,20 @@
-  <?php
-  include "./component/header.php";
-  session_start();
+<?php
+include "./component/header.php";
+session_start();
+$page = $_GET['page'];
+?>
 
-  ?>
+<!DOCTYPE html>
+<html>
 
-  <!DOCTYPE html>
-  <html>
+<meta charset="UTF-8">
 
-  <meta charset="UTF-8">
-
-  <head>
-    <title>使用者資料</title>
-    <link rel="stylesheet" type="text/css" href="./component/global_style.css">
-    <link rel="stylesheet" type="text/css" href="./styles/dashborad.css">
-    <script src="https://kit.fontawesome.com/00b6be94d5.js" crossorigin="anonymous"></script>
-    <style>
+<head>
+  <title>使用者資料</title>
+  <link rel="stylesheet" type="text/css" href="./component/global_style.css">
+  <link rel="stylesheet" type="text/css" href="./styles/dashborad.css">
+  <script src="https://kit.fontawesome.com/00b6be94d5.js" crossorigin="anonymous"></script>
+  <style>
     header {
       position: fixed;
       top: 0;
@@ -22,30 +22,16 @@
       width: 98%;
       z-index: 9999;
     }
-    
+
     .for-header {
       padding-top: 200px;
     }
   </style>
-    <script>
-      window.addEventListener('DOMContentLoaded', (event) => {
-        selectMenuItem('profile'); // 選擇並設定「個人檔案」為橘色
-      });
-    function enableEdit() {
-      var inputs = document.querySelectorAll(".value");
-      var submitBtn = document.querySelector(".submit");
-      for (var i = 0; i < inputs.length; i++) {
-        inputs[i].removeAttribute("readonly");
-      }
-      submitBtn.style.display = "block"; 
-    }
 
-      function addAnimation() {
-      var submitBtn = document.querySelector(".submit");
-      submitBtn.classList.add("animate");
-    }
-
-
+  <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+      selectMenuItem('profile'); // 選擇並設定「個人檔案」為橘色
+    });
 
     function selectMenuItem(item) {
       // 重置所有項目的文字顏色為預設值
@@ -58,132 +44,170 @@
       var selectedItem = document.querySelector('.menu-item[data-item="' + item + '"]');
       selectedItem.style.color = 'orange';
 
-      // 根據被點擊的項目執行相應的操作
-      switch (item) {
-        case 'profile':
-          document.querySelector('.section.profile-section').style.display = 'block';
-          break;
-        case 'purchaseList':
-          document.querySelector('.section.profile-section').style.display = 'none';
-          break;
-        default:
-          break;
+      // 隱藏所有的區域
+      var sections = document.querySelectorAll('.section');
+      for (var i = 0; i < sections.length; i++) {
+        sections[i].style.display = 'none';
+      }
+
+      // 確認跳轉頁面的參數值
+      var page = '<?php echo $page; ?>';
+
+      if (page === 'order-details') {
+        // 設置購買清單項目為橘色並移除個人檔案項目的橘色
+        var purchaseListMenuItem = document.querySelector('.menu-item[data-item="purchaseList"]');
+        var profileMenuItem = document.querySelector('.menu-item[data-item="profile"]');
+        purchaseListMenuItem.style.color = 'orange';
+        profileMenuItem.style.color = 'black';
+
+        // 只顯示訂單明細區塊並隱藏個人資料區塊
+        var profileSection = document.querySelector('.section.profile-section');
+        profileSection.style.display = 'none';
+        var orderDetailsSections = document.querySelectorAll('.section.order-details');
+        for (var i = 0; i < orderDetailsSections.length; i++) {
+          orderDetailsSections[i].style.display = 'block';
+        }
+      } else {
+        // 如果不是 'order-details'，保持預設效果，即個人檔案項目為橘色並顯示使用者資料區塊
+        var profileMenuItem = document.querySelector('.menu-item[data-item="profile"]');
+        profileMenuItem.style.color = 'orange';
+
+        // 隱藏訂單明細區塊
+        var orderDetailsSections = document.querySelectorAll('.section.order-details');
+        for (var i = 0; i < orderDetailsSections.length; i++) {
+          orderDetailsSections[i].style.display = 'none';
+        }
+
+        // 顯示個人資料區塊
+        var profileSection = document.querySelector('.section.profile-section');
+        profileSection.style.display = 'block';
       }
     }
-
   </script>
 
-  </head>
+</head>
 
 
 
-  <body class="all">
-    <div class = "for-header"></div>
+<body class="all">
+  <div class="for-header"></div>
 
   <div class="profile-section-wrapper">
-  <div class="dashboard-container">
-    <div class="sidebar">
-      <div class="user-profile">
+    <div class="dashboard-container">
+      <div class="sidebar">
+        <div class="user-profile">
 
-        <img src="images/user.png" class="user-photo">
-      <div class = "user-edit">
-        <div class="user-name"><?php echo $_SESSION['UserName']; ?></div>
-        <div class="edit-data" onclick="enableEdit()"><i class="fas fa-edit"></i>編輯資料</div>
-      </div>
-      </div>
-      <div class="menu">
-    <div class="menu-item"  data-item="profile" onclick = "selectMenuItem('profile')"><i class="fa-solid fa-file" style = "color:rgb(20, 110, 190);"></i><span class="menu-label" >個人檔案</span></div>
-    <div class="menu-item" data-item="purchaseList" onclick = "selectMenuItem('purchaseList')"><i class="fa-regular fa-clipboard" style = "color:rgb(20, 110, 190);"></i><span class="menu-label">購買清單</span></div>
-    <div class="menu-item" onclick="location.href='logout.php'"><i class="fa-solid fa-right-from-bracket" style = "color:red;"></i><span class="menu-label">帳戶登出</span></div>
-  </div>
-
-
-    </div>
-
-    <div class="main-content">
-      
-    <div class="section profile-section">
-    <div class="section-header">
-      <h1 class="content">我的檔案</h1>
-      <div class="ex">這個頁面可以管理檔案喔喔喔喔 </div>
-    </div>
-    <div class="section-content">
-    <div class = "profile-content">
-      <form method="POST" action="update.php">
-        <table class = "input">
-            <tr >
-              <td class = "profile-name">
-                <lable>使用者名稱</lable>
-              </td>
-              <td class="profile-value">
-                  <div class="input-value">
-                  <input type="text" id="UserName" name = "UserName" class="value" value="<?php echo $_SESSION['UserName']; ?>" readonly>
-                </div>
-              </td>
-            </tr>
-            <tr >
-              <td class = "profile-name">
-                <lable>Email</lable>
-              </td>
-              <td class="profile-value">
-                  <div class="input-value">
-                  <input type="text" id= "Email" name = "Email" class="value" value="<?php echo $_SESSION['Email']; ?>" readonly>
-                </div>
-              </td>
-            </tr>
-            <tr >
-              <td class = "profile-name">
-                <lable>聯絡資訊</lable>
-                </td>
-              <td class="profile-value">
-                  <div class="input-value">
-                  <input type="text" id = "ContactInfo" name = "ContactInfo" class="value" value="<?php echo $_SESSION['ContactInfo']; ?>" readonly>
-                </div>
-              </td>
-            </tr>
-            <tr >
-              <td class = "profile-name">
-                <lable>地址</lable>
-              </td>
-              <td class="profile-value">
-                  <div class="input-value">
-                  <input type="text" id = "Address" name = "Address" class="value" value="<?php echo $_SESSION['Address']; ?>" readonly>
-                </div>
-              </td>
-            </tr>
-            <tr >
-              <td class = "profile-name">
-                <lable></lable>
-              </td>
-              <td class="submit-profile">
-        <button type="submit" class="submit" onclick="addAnimation()">儲存</button>
-  </td>
-
-            </tr>
-        </table>  
-    </form>
-    </div>
-    <div class="photo">
-      <div class="photo-area">
-        <img src="images/user.png" class="user-photo">
-        <div class = "discript">我看你很喜歡蛋堡喔</div>
+          <img src="images/user.png" class="user-photo">
+          <div class="user-edit">
+            <div class="user-name">
+              <?php echo $_SESSION['UserName']; ?>
+            </div>
+            <div class="edit-data" onclick="enableEdit()"><i class="fas fa-edit"></i>編輯資料</div>
+          </div>
         </div>
+        <div class="menu">
+          <div class="menu-item" data-item="profile" onclick="selectMenuItem('profile')"><i class="fa-solid fa-file"
+              style="color:rgb(20, 110, 190);"></i><span class="menu-label">個人檔案</span></div>
+          <div class="menu-item" data-item="purchaseList" onclick="selectMenuItem('purchaseList')"><i
+              class="fa-regular fa-clipboard" style="color:rgb(20, 110, 190);"></i><span class="menu-label">購買清單</span>
+          </div>
+          <div class="menu-item" onclick="location.href='logout.php'"><i class="fa-solid fa-right-from-bracket"
+              style="color:red;"></i><span class="menu-label">帳戶登出</span></div>
+        </div>
+
+
       </div>
 
-  </div>
+      <div class="main-content">
+        <?php include "./component/smallpage/profile-section.php"; ?>
+        <?php
+        session_start();
 
-        </div>
+
+        include "db_connect.php";
+        $sql = "SELECT * FROM Orders WHERE UserID = {$_SESSION['UserID']}";
+
+        $stmt = $conn->query($sql);
+        $orders = array();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+          $orders[] = $row;
+        }
+
+        foreach ($orders as $order) {
+          $orderID = $order['OrderID'];
+          $orderDate = $order['OrderDate'];
+          $totalAmount = $order['TotalAmount'];
+          $sqlDetails = "SELECT * FROM OrderDetails WHERE OrderID = $orderID";
+
+          $stmtDetails = $conn->query($sqlDetails);
+          $orderDetails = $stmtDetails->fetchAll(PDO::FETCH_ASSOC);
+
+          echo '<div class="section order-details">';
+          foreach ($orderDetails as $detail) {
+            echo '<div class="order-con">';
+            echo '<div class="empty"></div>';
+            echo '<div class="border"></div>';
+
+            $productID = $detail['ProductID'];
+            $quantity = $detail['Quantity'];
+            $price = $detail['Price'];
+
+            // 取得商品資料
+            $sqlProduct = "SELECT * FROM Products WHERE ProductID = $productID";
+            $stmtProduct = $conn->query($sqlProduct);
+            $product = $stmtProduct->fetch(PDO::FETCH_ASSOC);
+            $productPhoto = $product['ProductPhoto'];
+            $productName = $product['ProductName'];
+
+            echo '<div class="per-product">';
+            echo '<div class = "de-product">';
+            echo '<div class="image-wrap">';
+            echo '<a href="product_details.php?id=' . $productID . '">';
+            echo '<img class="product-photo" src="' . $productPhoto . '">';
+            echo '</a>';
+            echo '</div>';
+            echo '<div class="product-details">';
+            echo '<div class = "section-product-name">';
+            echo '<span class="product-name">' . $productName . '</span>';
+            echo '</div>';
+            echo '<div class = section-quantity>';
+            echo '<p class="product-quantity">x' . $quantity . '</p>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+            echo '<p class="product-price">＄' . intval($price) . '</p>';
+
+            echo '</div>';
+
+            echo '</div>'; // 結束商品區塊的 div
+          }
+
+          echo '<div class="order-section">';
+          echo '<p class = "date">' . $orderDate . '</p>';
+          echo '<div class = "right-section">';
+          echo '<button class="cancel-button" onclick="window.location.href=\'delete_order.php?orderID=' . $orderID . '\'">取消訂單</button>';
+          echo '<div>訂單金額:</div>';
+          echo '<div class = "total-amount">＄' . intval($totalAmount) . '</div>';
+          echo '</div>';
+          echo '</div>';
+
+          echo '</div>'; // 結束 section 的 div
+        
+          // 添加訂單之間的間距
+          echo '<div class="order-spacing"></div>';
+        }
+
+        ?>
+
+
+
       </div>
     </div>
   </div>
-
   </div>
-        </div>
-      </div>
-    </div>
+  </div>
 
-  </body>
 
-  </html>
-  </html>
+</body>
 
+</html>
