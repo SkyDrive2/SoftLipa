@@ -106,12 +106,8 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
       $_SESSION['ContactInfo'] = $row['ContactInfo'];
       $_SESSION['Email'] = $row['Email'];
 
-      echo '<script>
-        if (confirm("登入成功")) {
-          window.location.href = "dashboard.php";
-        }
-      </script>';
-      exit();
+      echo '<script>window.location.href = "login_success.php";</script>';
+
     } else {
       echo '<script>
         if (confirm("登入失敗，請重新登入")) {
