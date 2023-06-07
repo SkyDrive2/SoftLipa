@@ -32,6 +32,20 @@ $page = $_GET['page'];
     window.addEventListener('DOMContentLoaded', (event) => {
       selectMenuItem('profile'); // 選擇並設定「個人檔案」為橘色
     });
+    function enableEdit() {
+      var inputs = document.querySelectorAll(".value");
+      var submitBtn = document.querySelector(".submit");
+      for (var i = 0; i < inputs.length; i++) {
+        inputs[i].removeAttribute("readonly");
+      }
+      submitBtn.style.display = "block";
+    }
+
+    function addAnimation() {
+      var submitBtn = document.querySelector(".submit");
+      submitBtn.classList.add("animate");
+    }
+
 
     function selectMenuItem(item) {
       // 重置所有項目的文字顏色為預設值

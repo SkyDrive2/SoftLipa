@@ -89,42 +89,42 @@
 
 
   </script>
-   
+
 </head>
 
 <body>
-  
+
   <script>
     document.addEventListener('DOMConte<header>
-    <div class="header-left">
+      < div class= "header-left" >
 
       <a href="index.html" class="logo-link">
         <h1>任性的人</h1>
       </a>
 
 
-    </div>
-    <div class="header-right">
+    </div >
+      <div class="header-right">
 
-      <div id="search-box">
-        <input type="text"> <!-- <button id="search-btn">搜尋</button> -->
+        <div id="search-box">
+          <input type="text"> <!-- <button id="search-btn">搜尋</button> -->
+        </div>
+        <a href="#" id="search-icon"><i class="fas fa-search"></i></a>
+        <a href="login.html"><i class="fas fa-user"></i></a>
+        <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
       </div>
-      <a href="#" id="search-icon"><i class="fas fa-search"></i></a>
-      <a href="login.html"><i class="fas fa-user"></i></a>
-      <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
-    </div>
-  </header>ntLoaded', function () {
+  </header > ntLoaded', function () {
       document.getElementById('search-icon').addEventListener('click', function () {
         var searchBox = document.getElementById('search-box');
         searchBox.classList.toggle('active');
       });
-    });
+    );
   </script>
 
   <div class="registration-container">
     <h2>註冊</h2>
 
-    <form action="http://127.0.0.1/softlipa/register.php" method="POST">
+    <form action="register.php" method="POST">
       <div class="form-group">
         <label for="username">輸入Email</label>
         <input type="text" id="username" name="username" required onkeyup="validateEmail();checkFormValidity()">
@@ -170,47 +170,47 @@
       </div>
     </form>
     <div class="wave"></div>
-     <div class="wave"></div>
-     <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
   </div>
 </body>
 
 </html>
 
 <?php
-        include "db_connect.php";
+include "db_connect.php";
 
-        // 確認表單已提交
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // 獲取表單提交的資料
-            $email = $_POST["username"];
-            $password = $_POST["password"];
+// 確認表單已提交
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // 獲取表單提交的資料
+  $email = $_POST["username"];
+  $password = $_POST["password"];
 
-            // 檢查使用者是否已經存在
-            $checkUserQuery = "SELECT * FROM Users WHERE email='$email'"; 
-            $checkUserResult = $conn->query($checkUserQuery);
-            if ($checkUserResult->fetch(PDO::FETCH_ASSOC)) {
-                echo '<script>
+  // 檢查使用者是否已經存在
+  $checkUserQuery = "SELECT * FROM Users WHERE email='$email'";
+  $checkUserResult = $conn->query($checkUserQuery);
+  if ($checkUserResult->fetch(PDO::FETCH_ASSOC)) {
+    echo '<script>
                 if (confirm("該帳號已被使用")) {
                   window.location.href = "register.php";
                 }
               </script>';
-            } else {
-                //將資料插入資料庫
-                $insertQuery = "INSERT INTO Users(Email,Password) VALUES ('$email', '$password')";
-                $qury = $conn->query($insertQuery) ;
-                if($qury){
-                  echo '<script>
+  } else {
+    //將資料插入資料庫
+    $insertQuery = "INSERT INTO Users(Email,Password) VALUES ('$email', '$password')";
+    $qury = $conn->query($insertQuery);
+    if ($qury) {
+      echo '<script>
                   if (confirm("註冊成功，是否前往登入頁面？")) {
                     window.location.href = "login.php";
                   }
                 </script>';
-                }else{
-                  echo"出問題了喔";
-                }
-            }
+    } else {
+      echo "出問題了喔";
+    }
+  }
 
-            // 關閉資料庫連線
-            $conn->close();
-        }
-    ?>
+  // 關閉資料庫連線
+  $conn->close();
+}
+?>
