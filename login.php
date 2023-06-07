@@ -17,14 +17,6 @@
 
 <body>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      document.getElementById('search-icon').addEventListener('click', function () {
-        var searchBox = document.getElementById('search-box');
-        searchBox.classList.toggle('active');
-      });
-    });
-  </script>
 
 
   <div class="login-container">

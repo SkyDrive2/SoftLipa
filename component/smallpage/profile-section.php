@@ -65,7 +65,7 @@
     </div>
     <div class="photo">
       <div class="photo-area">
-        <img src="images/user.png" class="user-photo">
+        <img src="images/unname.png" class="user-photo">
         <div class="discript">我看你很喜歡蛋堡喔</div>
       </div>
     </div>

@@ -102,7 +102,7 @@ $page = $_GET['page'];
       <div class="sidebar">
         <div class="user-profile">
 
-          <img src="images/user.png" class="user-photo">
+          <img src="images/user.png" class="user-photo1">
           <div class="user-edit">
             <div class="user-name">
               <?php echo $_SESSION['UserName']; ?>

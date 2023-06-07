@@ -43,9 +43,18 @@
 .user-photo {
   width: 80px;
   height: 80px;
+  margin-right: 10px;
+  background-color: #ccc;
+  flex-shrink: 0;
+}
+
+.user-photo1 {
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   margin-right: 10px;
   background-color: #ccc;
+  flex-shrink: 0;
 }
 
 .user-name {
