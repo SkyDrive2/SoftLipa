@@ -1,0 +1,23 @@
+INSERT INTO products (ProductName, ProductDescription, Price, StockQuantity, ProductPhoto)
+VALUES
+  ('BOOM BAP Mint Green TEE KIDS', N'當你一心想著做音樂\n但又不得不陪小孩看卡通時\n眼裡就會出現這樣的錯覺\n獻給喜歡九零嘻哈的爸媽們\n雖然說是獻，但你還是要用買的\n小朋友穿是豪可愛ㄋㄟ！', 600, 52, 'https://shoplineimg.com/5d9b42a99a44b60001951113/63a8a97f4f08cb001a0b9dd9/800x.webp?source_format=png'),
+  ('BOOM BAP Orange TEE KIDS', N'當你一心想著做音樂\n但又不得不陪小孩看卡通時\n眼裡就會出現這樣的錯覺\n獻給喜歡九零嘻哈的爸媽們\n雖然說是獻，但你還是要用買的\n小朋友穿是豪可愛ㄋㄟ！', 600, 32, 'https://shoplineimg.com/5d9b42a99a44b60001951113/63a8a78e6e9d5f001580a840/2000x.webp?source_format=png'),
+  ('BOOM BAP Sky Blue TEE', N'當你一心想著做音樂\n但又不得不陪小孩看卡通時\n眼裡就會出現這樣的錯覺\n獻給喜歡九零嘻哈的爸媽們\n雖然說是獻，但你還是要用買的！', 1300, 13, 'https://shoplineimg.com/5d9b42a99a44b60001951113/63a8abc9144250000e4deda1/800x.webp?source_format=png'),
+  ('BOOM BAP Purple TEE', N'當你一心想著做音樂\n但又不得不陪小孩看卡通時\n眼裡就會出現這樣的錯覺\n獻給喜歡九零嘻哈的爸媽們\n雖然說是獻，但你還是要用買的！', 1300, 13, 'https://shoplineimg.com/5d9b42a99a44b60001951113/63a8abe452b1e8001062ee94/800x.webp?source_format=png'),
+  ('EndLess Summer Dark Grey TEE', N'“那是一個史上最長的暑假\n度過路上無人無車的午夜\n龐大的壓力就在空中盤旋\n那個夏天彷彿永遠不會完結“', 1300, 12, 'https://shoplineimg.com/5d9b42a99a44b60001951113/63a89a8b9d40e30014e26370/800x.webp?source_format=png'),
+  ('Softlipapa IG Black TEE', N'IG搜尋：softlipapa\n不買也加一下IG吧？', 1300, 47, 'https://shoplineimg.com/5d9b42a99a44b60001951113/63a897146e8b4c0017919642/800x.webp?source_format=png'),
+  ('RSDR 2G White TEE', N'事情是這樣的\n拍商品照的時候因為身心俱疲\n我一度情緒失控\n把衣服用力一丟就拍了\n後來我深刻檢討自己\n覺得情緒化是沒法把事情做好的\n所以還是認真地修圖去背了\n這不是一坨衛生紙\n基本上它的設計就是跟黑TEE一樣\n只是變成白色了\n不經一事不長一智\n如果你認為我的成長值得鼓勵\n請下單', 1300, 24, 'https://shoplineimg.com/5d9b42a99a44b60001951113/63a88bb5931a710020b0a84f/800x.webp?source_format=png'),
+  ('RSDR 2G Black TEE', N'某天，我穿著以前的任性logo TEE走在路上。\n迎面，一名步履蹣跚但眼神充滿智慧的老者叫住了我：\n「年輕人，你衣服上這是什麼圖案？」\n「啊⋯是我自己品牌的衣服，這是品牌logo⋯」我略帶靦腆，指著胸前介紹道。\n 老者若有所思望著我，緩緩說道：\n「自信一點，把logo放大！」\n當我還沒來得及反應，他已化為一縷輕煙，消失在塵世之中⋯⋯。', 1300, 28, 'https://shoplineimg.com/5d9b42a99a44b60001951113/63a88969c59174001a015123/800x.webp?source_format=png'),
+  ('RSDR 2G Black Sweatshirt', N'入冬某天，我穿著二代任性logo短TEE走在路上。\n迎面，又見著那名步履蹣跚但眼神充滿智慧的老者：\n「年輕人，不錯！有聽我建議！」他滿意地笑著。\n「哈⋯對啊，我也覺得做大logo蠻帥的⋯」我語帶自信，面露感激。\n此時這位老者又看著我，緩緩說道：\n「阿你不會冷喔？」', 2000, 27, 'https://shoplineimg.com/5d9b42a99a44b60001951113/63a8ac6482ce1c0020dfb77c/800x.webp?source_format=png'),
+  ('RSDR Down Hoodie', N'九〇年代的澎鬆輪廓\n輕量合身的穿著體驗\n尼龍觸感，俐落舒適\n帽Ｔ造型，秋冬定番\n極簡設計\n低調中暗藏玄機\n反光logo\n黑夜裡更顯安全\n城市裡的黑馬\n舞台上的揮灑\n不被他們看好\n就讓他們好看\n得獎我穿：爆・冷・羽・絨・衣', 5280, 20, 'https://shoplineimg.com/5d9b42a99a44b60001951113/61df47e455f31f001a05704a/800x.webp?source_format=png'),
+  ('RSDR tag Gray Hoodie', N'《夜作圖記》杜熙\n夜半作新圖，\n日出入夢鄉。\nlogo白如雪，\n淺灰適冬裝\n釋意：\n在半夜的時候突然興起了設計一個新圖案的想法，就一直做到天亮後才休息。打算用像雪一樣的白色，印在適合冬天的淺灰色Hoodie上。\n解析：\n在《夜作圖記》裡，人稱「詩畫雙絕」的詩人杜熙，直白地描述了一名設計師在半夜靈感襲來而進入心流的景象，並巧妙運用服裝與季節的色彩特徵搭配來做譬喻，淺顯易懂、引人下單。', 2200, 21, 'https://shoplineimg.com/5d9b42a99a44b60001951113/6019df5586ec2a002058b82a/800x.webp?source_format=png'),
+  ('Army Green SL Hoodie', N'你終究要買SL logo 帽T，那為什麼不現在就買？\n', 2200, 14, 'https://shoplineimg.com/5d9b42a99a44b60001951113/6019df7704e58f002c5a9717/800x.webp?source_format=png'),
+  ('RSDR Red Hoodie', N'任性logo擺胸前\n大搖大擺迎新年', 2200, 18, 'https://shoplineimg.com/5d9b42a99a44b60001951113/6019dfc014d1940038a90e68/800x.webp?source_format=png'),
+  ('Input Sattva Green TEE', N'音菩薩mv 畫面變成TEE', 1300, 51, 'https://shoplineimg.com/5d9b42a99a44b60001951113/6019dfea14d194001da90e32/800x.webp?source_format=png'),
+  ('Home Cookin Royal Blue TEE', N'家常音樂mv 畫面變成TEE (mv VIBE)', 1300, 12, 'https://shoplineimg.com/5d9b42a99a44b60001951113/5f8ee3bd2c625f00291f3110/800x.webp?source_format=png'),
+  ('SL White TEE', N'SL logo TEE\n蛋堡本人著用', 1300, 32, 'https://shoplineimg.com/5d9b42a99a44b60001951113/5f8ee20b2bdee6002ca7f294/800x.webp?source_format=png'),
+  ('RSDR Pink TEE KIDS', N'小朋友最任性\n認同請下單', 600, 78, 'https://shoplineimg.com/5d9b42a99a44b60001951113/5f65e92bbb98c6003efe7e55/800x.webp?source_format=png'),
+  ('RSDR Gray TEE KIDS', N'小朋友最任性\n認同請下單', 600, 21, 'https://shoplineimg.com/5d9b42a99a44b60001951113/5f65e8f7f8c4e20032afac82/800x.webp?source_format=png'),
+  ('RSDR Black TEE KIDS', N'小朋友最任性\n認同請下單', 600, 69, 'https://shoplineimg.com/5d9b42a99a44b60001951113/5f65e8bef3ff390020bdd09f/800x.webp?source_format=png'),
+  ('SPIDER MV TEE', N'蜘蛛mv 畫面變成TEE\n忘記的話我們再複習一次', 1200, 29, 'https://shoplineimg.com/5d9b42a99a44b60001951113/5f65e8349f95ed003b4e5f03/800x.webp?source_format=png'),
+  ('RSDR White TEE KIDS', N'小朋友最任性\n認同請下單', 600, 32, 'https://shoplineimg.com/5d9b42a99a44b60001951113/5f65e8899f95ed82fc4e1263/800x.webp?source_format=png');

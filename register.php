@@ -47,8 +47,6 @@
 
       if (!hasUppercase || !hasLowercase || !hasSymbol) {
         requirements.textContent = "⚠️須包含大小寫及符號";
-      } else if (password !== confirmPassword) {
-        requirements.textContent = "⚠️密碼與確認密碼不一致";
       } else {
         requirements.textContent = "";
       }
