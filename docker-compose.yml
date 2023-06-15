@@ -1,0 +1,21 @@
+version: '3'
+services:
+  apache:
+    container_name: skydrive-apache2
+    ports:
+      - "8081:80"
+    build: .
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - sql-server
+
+  sql-server:
+    container_name: skydrive-sql
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    hostname: skydrive-sql
+    ports:
+      - "8082:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Test123456...
